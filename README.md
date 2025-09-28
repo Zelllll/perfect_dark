@@ -58,3 +58,13 @@ The extract command will also create an `extracted/ntsc-final` directory. This d
 Run `make` followed by `make test`. If `make test` produces no output then the compiled project is matching.
 
 You can also md5sum your base ROM with the built ROM and check they have the same hash: `md5sum pd.ntsc-final.z64 build/ntsc-final/pd.z64`.
+
+## Building the ASP microcode without the full build system
+
+If you only need the raw ASP microcode images, run the helper script instead of invoking the entire make pipeline:
+
+```bash
+./tools/make_asp_bin.py
+```
+
+This assembles `src/rsp/asp.s` with `armips`, writing `asp.text.bin` (IMEM), `asp.data.bin` (DMEM), and a concatenated `asp.bin` to `build/standalone/rsp/` by default. Pass `--outdir` to change the destination or `--armips` if the assembler binary lives outside of your `PATH`.
